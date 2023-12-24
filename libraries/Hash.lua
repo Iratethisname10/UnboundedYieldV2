@@ -1276,7 +1276,7 @@ end
 local sha = {
 	md5 = md5,
 	sha1 = sha1,
-	-- SHA2 hash functions:
+	
 	sha224 = function(message)
 		return sha256ext(224, message)
 	end;
@@ -1301,7 +1301,6 @@ local sha = {
 		return sha512ext(512, message)
 	end;
 
-	-- SHA3 hash functions:
 	sha3_224 = function(message)
 		return keccak((1600 - 2 * 224) / 8, 224 / 8, false, message)
 	end;
