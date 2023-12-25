@@ -9,6 +9,7 @@ local controller = {
     playerIds = {},
     isAlive = false,
 	LocalPosition = Vector3.zero
+	allParts = {"Head", "HumanoidRootPart", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg", "LeftHand", "RightHand", "LeftLowerArm", "RightLowerArm", "LeftUpperArm", "RightUpperArm", "LeftFoot", "LeftLowerLeg", "UpperTorso", "LeftUpperLeg", "RightFoot", "RightLowerLeg", "LowerTorso", "RightUpperLeg"}
     character = {
         Head = {},
         Humanoid = {},
