@@ -13,10 +13,12 @@ local TeleportService = cloneref(game:GetService("TeleportService"))
 
 local startedLoadTick = tick()
 
+DEBUG_PRINT("library stuff 1")
 local signallib = getScipt("libraries/Signal.lua")
 local Maid = getScipt("libraries/Maid.lua")
 local keybindViewer = getScipt("ui/ui-helpers/keybindViewer.lua")
 local notif = getScipt("ui/ui-helpers/Notifications.lua")
+DEBUG_PRINT("library stuff 2")
 
 local clipboardFunc = setclipboard or toclipboard or set_clipboard or Clipboard and Clipboard.set
 local requestFunc = http and http.request or http_request or fluxus and fluxus.request or request
@@ -67,6 +69,7 @@ local library = {
 
 library.originalTitle = library.title
 
+DEBUG_PRINT("library stuff 3")
 xpcall(function()
     library.unloadMaid:GiveTask(task.spawn(function()
         while true do
