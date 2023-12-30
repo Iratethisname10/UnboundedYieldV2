@@ -49,7 +49,7 @@ local library = {
 	tabs = {},
 	draggable = true,
 	flags = {},
-	title = string.format("Unbounded Yield v2 v%s", DEBUG_MODE and scriptVersion .. "DEBUG" or scriptVersion),
+	title = string.format("Unbounded Yield v2.%s", DEBUG_MODE and scriptVersion .. "DEBUG" or scriptVersion),
 	open = false,
 	popup = nil,
 	instances = {},
@@ -2392,7 +2392,7 @@ xpcall(function()
                     option.section = self
                     option.text = tostring(option.text)
                     option.min = typeof(option.min) == "number" and option.min or 0
-                    option.max = typeof(option.max) == "number" and option.max or 0
+                    option.max = typeof(option.max) == "number" and option.max or 10
                     option.value = option.min < 0 and 0 or math.clamp(typeof(option.value) == "number" and option.value or option.min, option.min, option.max)
                     option.default = option.value
                     option.callback = typeof(option.callback) == "function" and option.callback or function() end
@@ -2920,8 +2920,10 @@ xpcall(function()
 
         if RunService:IsStudio() then
             self.base.Parent = script.Parent.Parent
-        elseif gethui then
-			self.base.Parent = gethui()
+        --elseif gethui then
+		--	self.base.Parent = gethui()
+		else
+			self.base.Parent = CoreGui
 		end
 
         self.main = self:Create("ImageButton", {
@@ -3645,16 +3647,16 @@ xpcall(function()
 
         discordSection:AddButton({
             text = "Join Discord",
-            callback = function() return joinDiscord("") end
+            callback = function() return joinDiscord("264eGWpV2z") end
         })
 
         discordSection:AddButton({
             text = "Copy Discord Invite",
-            callback = function() return clipboardFunc("discord.gg/") end
+            callback = function() return clipboardFunc("discord.gg/264eGWpV2z") end
         })
     end
 end, function(err)
-	lplr:Kick("[UY]: something went wrong with loading ui lib (1)")
+	lplr:Kick("[UY]: something went wrong with loading ui lib (1)\n" .. err)
 	return
 end)
 
