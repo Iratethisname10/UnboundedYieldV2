@@ -34,7 +34,7 @@ local lplr = cloneref(Players.LocalPlayer)
 
 local visualizer
 
-if not isfile("Unbounded Yield v2/configs") then
+if not isfolder("Unbounded Yield v2/configs") then
 	makefolder("Unbounded Yield v2/configs")
 end
 
