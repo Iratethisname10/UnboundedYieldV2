@@ -70,7 +70,7 @@ local library = {
 library.originalTitle = library.title
 
 DEBUG_PRINT("library stuff 3")
-xpcall(function()
+do
     library.unloadMaid:GiveTask(task.spawn(function()
         while true do
             for i = 1, 360 do
@@ -1777,7 +1777,7 @@ xpcall(function()
             Size = UDim2.new(0, (option.mainHolder.AbsoluteSize.X - 12), 0, 20),
             BackgroundColor3 = Color3.fromRGB(57, 57, 57),
             BorderColor3 = Color3.new(),
-            ZIndex = 5
+            ZIndex = 5,
             Parent = option.mainHolder
         })
 
@@ -1787,7 +1787,7 @@ xpcall(function()
             Image = "rbxassetid://2454009026",
             ImageColor3 = Color3.new(),
             ImageTransparency = 0.8,
-            ZIndex = 6
+            ZIndex = 6,
             Parent = option.rgbBox
         })
 
@@ -1798,7 +1798,7 @@ xpcall(function()
             ImageColor3 = Color3.fromRGB(60, 60, 60),
             ScaleType = Enum.ScaleType.Slice,
             SliceCenter = Rect.new(2, 2, 62, 62),
-            ZIndex = 6
+            ZIndex = 6,
             Parent = option.rgbBox
         })
 
@@ -1810,7 +1810,7 @@ xpcall(function()
             ImageColor3 = Color3.new(),
             ScaleType = Enum.ScaleType.Slice,
             SliceCenter = Rect.new(2, 2, 62, 62),
-            ZIndex = 6
+            ZIndex = 6,
             Parent = option.rgbBox
         })
 
@@ -1828,7 +1828,7 @@ xpcall(function()
             TextXAlignment = Enum.TextXAlignment.Center,
             TextWrapped = true,
             ClearTextOnFocus = false,
-            ZIndex = 6
+            ZIndex = 6,
             Parent = option.rgbBox
         })
 
@@ -3655,10 +3655,7 @@ xpcall(function()
             callback = function() return clipboardFunc("discord.gg/264eGWpV2z") end
         })
     end
-end, function(err)
-	lplr:Kick("[UY]: something went wrong with loading ui lib (1)\n" .. err)
-	return
-end)
+end
 
 do
 	library.mainTabs.combat = library:AddTab("Combat")
