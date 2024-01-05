@@ -25,10 +25,10 @@ function Signal:Fire(...)
 end
 
 function Signal:Connect(handler)
-	if not self._bindableEvent then return DEBUG.Warn("Signal has been destroyed") end
+	if not self._bindableEvent then return DEBUG_WARN("Signal has been destroyed") end
 
 	if not (type(handler) == "function") then
-		DEBUG.Warn(("connect(%s)"):format(typeof(handler)))
+		DEBUG_WARN(("connect(%s)"):format(typeof(handler)))
 	end
 
 	return self._bindableEvent.Event:Connect(function()
@@ -40,7 +40,7 @@ function Signal:Wait()
 	self._bindableEvent.Event:Wait()
 
 	if not self._argData then
-		return DEBUG.Warn("Missing arg data, likely due to :TweenSize/Position corrupting threadrefs.")
+		return DEBUG_WARN("Missing arg data, likely due to :TweenSize/Position corrupting threadrefs.")
 	end
 	
 	return unpack(self._argData, 1, self._argCount)

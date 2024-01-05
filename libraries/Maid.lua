@@ -1,4 +1,4 @@
-local Signal = getScipt("libraries/Signal.lua")
+local Signal = getScript("libraries/Signal.lua")
 
 local Maid = {}
 Maid.ClassName = "Maid"
@@ -23,7 +23,7 @@ end
 
 function Maid:__newindex(index, newTask)
 	if Maid[index] ~= nil then
-		DEBUG.Warn(("'%s' is reserved"):format(tostring(index)))
+		DEBUG_WARN(("'%s' is reserved"):format(tostring(index)))
 	end
 
 	local tasks = self._tasks
@@ -40,11 +40,11 @@ function Maid:__newindex(index, newTask)
 			oldTask()
 		elseif typeof(oldTask) == "RBXScriptConnection" then
 			oldTask:Disconnect()
-		elseif typeof(oldTask) == 'table' then
+		elseif typeof(oldTask) == "table" then
 			oldTask:Remove()
-		elseif (Signal.isSignal(oldTask)) then
+		elseif Signal.isSignal(oldTask) then
 			oldTask:Destroy()
-		elseif (typeof(oldTask) == 'thread') then
+		elseif typeof(oldTask) == "thread" then
 			task.cancel(oldTask)
 		elseif oldTask.Destroy then
 			oldTask:Destroy()
@@ -54,7 +54,7 @@ end
 
 function Maid:GiveTask(task)
 	if not task then
-		DEBUG.Warn("Task cannot be false or nil")
+		DEBUG_WARN("Task cannot be false or nil")
 	end
 
 	local taskId = #self._tasks+1

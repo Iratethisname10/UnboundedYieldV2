@@ -66,7 +66,7 @@ do
         end,
     }
 
-    controller.isPlayerTargetable = function(plr)
+    controller.isPlayerAttackable = function(plr)
         if (not lplr.Team) then return true end
         if (not plr.Team) then return true end
         if plr.Team ~= lplr.Team then return true end
@@ -146,7 +146,7 @@ do
                             RootPart = humrootpart,
                             Head = head,
                             Humanoid = hum,
-                            Targetable = controller.isPlayerTargetable(plr),
+                            Attackable = controller.isPlayerAttackable(plr),
                             Team = plr.Team,
                             Connections = {}
                         }
@@ -192,7 +192,7 @@ do
         table.insert(controller.playerConnections, plr:GetPropertyChangedSignal("Team"):Connect(function()
             for i = 1, #controller.playerList do
                 local v = controller.playerList[i]
-                if v and v.Targetable ~= controller.isPlayerTargetable(v.Player) then 
+                if v and v.Attackable ~= controller.isPlayerAttackable(v.Player) then 
                     controller.refreshPlayer(v.Player)
                 end
             end 
