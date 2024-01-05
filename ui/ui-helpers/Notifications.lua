@@ -1,6 +1,6 @@
 local cloneref = cloneref or function(...) return ... end
-local Maid = getScipt("libraries/Maid.lua")
-local Signal = getScipt("libraries/Signal.lua")
+local Maid = getScript("libraries/Maid.lua")
+local Signal = getScript("libraries/Signal.lua")
 
 local TweenService = cloneref(game:GetService("TweenService"))
 local UserInputService = cloneref(game:GetService("UserInputService"))
@@ -15,9 +15,9 @@ local viewportSize = workspace.CurrentCamera.ViewportSize
 
 local TWEEN_INFO = TweenInfo.new(0.2, Enum.EasingStyle.Quad)
 local VALUE_NAMES = {
-    number = 'NumberValue',
-    Color3 = 'Color3Value',
-    Vector2 = 'Vector3Value',
+    number = "NumberValue",
+    Color3 = "Color3Value",
+    Vector2 = "Vector3Value",
 }
 
 local movingUpFinished = true
@@ -42,7 +42,7 @@ end
 function Notification:_createDrawingInstance(instanceType, properties)
     local instance = Drawing.new(instanceType)
 
-    if (properties.Visible == nil) then
+    if properties.Visible == nil then
         properties.Visible = true
     end
 
@@ -54,7 +54,7 @@ function Notification:_createDrawingInstance(instanceType, properties)
 end
 
 function Notification:_getTextBounds(text, fontSize)
-    local t = Drawing.new('Text')
+    local t = Drawing.new("Text")
     t.Text = text
     t.Size = fontSize
 
@@ -79,7 +79,7 @@ function Notification:_tweenProperty(instance, property, value, tweenInfo, dontC
 
 	self._tweens[tween] = dontCancel or false
 
-    self._maid:GiveTask(valueObject:GetPropertyChangedSignal('Value'):Connect(function()
+    self._maid:GiveTask(valueObject:GetPropertyChangedSignal("Value"):Connect(function()
         local newValue = valueObject.Value
 
         if (valueType == "Vector2") then
@@ -98,7 +98,7 @@ function Notification:_tweenProperty(instance, property, value, tweenInfo, dontC
 
     tween:Play()
 
-    if (instance == self._progressBar and property == 'Size') then
+    if instance == self._progressBar and property == "Size" then
         self._maid:GiveTask(tween.Completed:Connect(function(playbackState)
             if (playbackState ~= Enum.PlaybackState.Completed) then return end
             self:Destroy()
@@ -112,11 +112,11 @@ function Notification:_init()
 	self:MoveUp()
 
     local textSize = Vector2.new(self:_getTextBounds(self._options.text, 19), 30)
-    textSize += Vector2.new(10, 0) -- // Padding
+    textSize += Vector2.new(10, 0)
 
     self._textSize = textSize
 
-    self._frame = self:_createDrawingInstance('Square', {
+    self._frame = self:_createDrawingInstance("Square", {
         Size = textSize,
         Position = viewportSize - Vector2.new(-10, textSize.Y+10),
         Color = Color3.fromRGB(12, 12, 12),
@@ -125,7 +125,7 @@ function Notification:_init()
 
     self._originalPosition = self._frame.Position
 
-    self._text = self:_createDrawingInstance('Text', {
+    self._text = self:_createDrawingInstance("Text", {
         Text = self._options.text,
         Center = true,
         Color = Color3.fromRGB(255, 255, 255),
@@ -133,7 +133,7 @@ function Notification:_init()
         Size = 19
     })
 
-    self._progressBar = self:_createDrawingInstance('Square', {
+    self._progressBar = self:_createDrawingInstance("Square", {
         Size = Vector2.new(textSize.X, 3),
         Color = Color3.fromRGB(86, 180, 211),
         Filled = true,
@@ -151,7 +151,7 @@ function Notification:_init()
 
 	self._maid._progressConnection = t.Completed:Connect(function()
 		if (self._options.duration) then
-			self:_tweenProperty(self._progressBar, 'Size', Vector2.new(0, 3), TweenInfo.new(self._options.duration, Enum.EasingStyle.Linear))
+			self:_tweenProperty(self._progressBar, "Size", Vector2.new(0, 3), TweenInfo.new(self._options.duration, Enum.EasingStyle.Linear))
 			self:_tweenProperty(self._progressBar, "Position", framePos - Vector2.new(-self._frame.Size.X, -(self._frame.Size.Y-3)), TweenInfo.new(self._options.duration, Enum.EasingStyle.Linear)) --You should technically remove this after its complete but doesn't matter
 		end
 	end)
@@ -197,7 +197,7 @@ function Notification:MoveUp()
 
 		local newDuration = v._options.duration-(tick()-v._startTime)
 
-		v:_tweenProperty(v._progressBar, 'Size', Vector2.new(0, 3), TweenInfo.new(newDuration, Enum.EasingStyle.Linear))
+		v:_tweenProperty(v._progressBar, "Size", Vector2.new(0, 3), TweenInfo.new(newDuration, Enum.EasingStyle.Linear))
 		v:_tweenProperty(v._progressBar, "Position", newFramePos - Vector2.new(-v._frame.Size.X, -(v._frame.Size.Y-3)), TweenInfo.new(newDuration, Enum.EasingStyle.Linear))
 	end
 	movingUpFinished = true
@@ -232,7 +232,7 @@ function Notification:MoveDown()
 		v._startTime = v._startTime or tick()
 		local newDuration = v._options.duration-(tick()-v._startTime)
 
-		v:_tweenProperty(v._progressBar, 'Size', Vector2.new(0, 3), TweenInfo.new(newDuration, Enum.EasingStyle.Linear))
+		v:_tweenProperty(v._progressBar, "Size", Vector2.new(0, 3), TweenInfo.new(newDuration, Enum.EasingStyle.Linear))
 		v:_tweenProperty(v._progressBar, "Position", newFramePos - Vector2.new(-v._frame.Size.X, -(v._frame.Size.Y-3)), TweenInfo.new(newDuration, Enum.EasingStyle.Linear))
 	end
 	movingDownFinished = true

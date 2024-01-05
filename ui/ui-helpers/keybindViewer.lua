@@ -1,6 +1,6 @@
 local cloneref = cloneref or function(...) return ... end
 local UserInputService = cloneref(game:GetService("UserInputService"))
-local Maid = getScipt("libraries/Maid.lua")
+local Maid = getScript("libraries/Maid.lua")
 
 local keybindVisualizer = {}
 keybindVisualizer.__index = keybindVisualizer
@@ -31,7 +31,7 @@ function keybindVisualizer.new()
     end))
 
     self._maid:GiveTask(UserInputService.InputChanged:connect(function(input)
-        if dragging and input.UserInputType.Name == 'MouseMovement' and not self._destroyed then
+        if dragging and input.UserInputType.Name == "MouseMovement" and not self._destroyed then
             if dragging then
                 local delta = input.Position - dragStart
                 local yPos = (startPos.Y + delta.Y) < -36 and -36 or startPos.Y + delta.Y
@@ -43,21 +43,21 @@ function keybindVisualizer.new()
     end))
 
     self._maid:GiveTask(UserInputService.InputEnded:connect(function(input)
-        if input.UserInputType.Name == 'MouseButton1' then
+        if input.UserInputType.Name == "MouseButton1" then
             dragging = false
         end
     end))
 
     library.OnLoad:Connect(function()
         if (not library.configVars.keybindVisualizerPos) then return end
-        self._textBox.Position = Vector2.new(unpack(library.configVars.keybindVisualizerPos:split(',')))
+        self._textBox.Position = Vector2.new(unpack(library.configVars.keybindVisualizerPos:split(",")))
     end)
 
     return self
 end
 
 function keybindVisualizer:_getTextBounds(text, fontSize)
-    local t = Drawing.new('Text')
+    local t = Drawing.new("Text")
     t.Text = text
     t.Size = fontSize
 
@@ -81,7 +81,7 @@ function keybindVisualizer:_createDrawingInstance(instanceType, properties)
 end
 
 function keybindVisualizer:_init()
-    self._textBox = self:_createDrawingInstance('Text', {
+    self._textBox = self:_createDrawingInstance("Text", {
         Size = 30,
         Position = viewportSize-Vector2.new(180, viewportSize.Y/2),
         Color = Color3.new(255, 255, 255)
@@ -97,7 +97,7 @@ function keybindVisualizer:AddText(txt)
     if (self._destroyed) then return end
     self._largest = self:GetLargest()
 
-    local tab = string.split(self._textBox.Text, '\n')
+    local tab = string.split(self._textBox.Text, "\n")
     if (table.find(tab, txt)) then return end
 
     local textSize = Vector2.new(self:_getTextBounds(txt, 30), 30)
@@ -106,7 +106,7 @@ function keybindVisualizer:AddText(txt)
     table.insert(tab, txt)
     table.sort(tab, function(a, b) return #a < #b end)
 
-    self._textBox.Text = table.concat(tab, '\n')
+    self._textBox.Text = table.concat(tab, "\n")
     self._textBox.Position -= Vector2.new(0, 30)
 end
 
@@ -125,10 +125,10 @@ function keybindVisualizer:RemoveText(txt)
 
     self._largest = self:GetLargest()
 
-    local tab = string.split(self._textBox.Text, '\n')
+    local tab = string.split(self._textBox.Text, "\n")
     table.remove(tab, table.find(tab, txt))
 
-    self._textBox.Text = table.concat(tab, '\n')
+    self._textBox.Text = table.concat(tab, "\n")
     self._textBox.Position += Vector2.new(0, 30)
 end
 
