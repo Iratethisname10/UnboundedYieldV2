@@ -14,10 +14,10 @@ local TeleportService = cloneref(game:GetService("TeleportService"))
 local startedLoadTick = tick()
 
 DEBUG_PRINT("library stuff 1")
-local signallib = getScipt("libraries/Signal.lua")
-local Maid = getScipt("libraries/Maid.lua")
-local keybindViewer = getScipt("ui/ui-helpers/keybindViewer.lua")
-local notif = getScipt("ui/ui-helpers/Notifications.lua")
+local signallib = getScript("libraries/Signal.lua")
+local Maid = getScript("libraries/Maid.lua")
+local keybindViewer = getScript("ui/ui-helpers/keybindViewer.lua")
+local notif = getScript("ui/ui-helpers/Notifications.lua")
 DEBUG_PRINT("library stuff 2")
 
 local clipboardFunc = setclipboard or toclipboard or set_clipboard or Clipboard and Clipboard.set
