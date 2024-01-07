@@ -75,7 +75,7 @@ do
         while true do
             for i = 1, 360 do
                 library.chromaColor = Color3.fromHSV(i / 360, 1, 1)
-                task.wait(0.1)
+                task.wait()
             end
         end
     end))
@@ -209,7 +209,7 @@ do
         local t = a and Drawing or Instance
         local inst = t.new(class)
 
-        for property, value in next, properties do
+        for property, value in pairs(properties) do
             inst[property] = value
         end
         table.insert(self.instances, {object = inst, method = a})
@@ -246,6 +246,7 @@ do
 			if connection.Disconnect then pcall(function() connection:Disconnect() end) continue end
 			if connection.disconnect then pcall(function() connection:disconnect() end) continue end
 		end
+		table.clear(library.scriptConnections)
 		
 		table.clear(library.mainTabs)
 		table.clear(library.mainColumns)
@@ -504,7 +505,7 @@ do
         local tickboxOverlay
 
         if option.style then
-            tickbox = library:Create("ImageLabel", {
+            tickbox = library:Create("ImageLabel",{
                 Position = UDim2.new(0, 6, 0, 4),
                 Size = UDim2.new(0, 12, 0, 12),
                 BackgroundTransparency = 1,
@@ -2918,13 +2919,7 @@ do
 
         self.unloadMaid:GiveTask(self.base)
 
-        if RunService:IsStudio() then
-            self.base.Parent = script.Parent.Parent
-        --elseif gethui then
-		--	self.base.Parent = gethui()
-		else
-			self.base.Parent = CoreGui
-		end
+        self.base.Parent = CoreGui
 
         self.main = self:Create("ImageButton", {
             AutoButtonColor = false,
